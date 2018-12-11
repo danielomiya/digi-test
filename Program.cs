@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static System.Console;
@@ -39,18 +39,18 @@ namespace Digi.Test
     {
       int option;
 
-      try
+      if (!int.TryParse(input, out option))
       {
-        option = int.Parse(input);
-      }
-      catch
-      {
-        throw new ArgumentException(nameof(input) + " deve ser numérico");
+        WriteLine();
+        WriteLine(nameof(input) + " deve ser numérico");
+        return -1; // just reset
       }
 
       if (option < 0 || option > 5)
       {
-        throw new ArgumentException(nameof(option) + " deve estar entre 1 e 5");
+        WriteLine();
+        WriteLine(nameof(option) + " deve estar entre 1 e 5");
+        return -1;
       }
 
       return option;
@@ -87,12 +87,18 @@ namespace Digi.Test
           args = input.Split(' ');
 
           if (args.Count() != 3)
-            throw new ArgumentException($"Esperado 3 números, porém recebido {args.Count()} parâmetro(s)");
+          {
+            WriteLine($"Esperado 3 números, porém recebido {args.Count()} parâmetro(s)");
+            break;
+          }
 
           ints = args.ConvertArgsToInt();
 
           if (args.Count() != ints.Count()) // if any data gets lost it wasn't a number
-            throw new ArgumentException("Esperado input numérico, porém recebido texto");
+          {
+            WriteLine("Esperado input numérico, porém recebido texto");
+            break;
+          }
 
           WriteLine($"O menor número digitado foi: {ints.Min()}");
           break;
@@ -102,17 +108,26 @@ namespace Digi.Test
           args = input.Split(' ');
 
           if (args.Count() != 3)
-            throw new ArgumentException($"Esperado 3 números, porém recebido {args.Count()} parâmetro(s)");
+          {
+            WriteLine($"Esperado 3 números, porém recebido {args.Count()} parâmetro(s)");
+            break;
+          }
 
           ints = args.ConvertArgsToInt();
 
           if (args.Count() != ints.Count()) // same as before
-            throw new ArgumentException("Esperado input numérico, porém recebido texto");
+          {
+            WriteLine("Esperado input numérico, porém recebido texto");
+            break;
+          }
 
           ints = ints.Distinct();
 
           if (ints.Count() != args.Count()) // now if data gets lost it was repeated
-            throw new ArgumentException("O input deve ser de 3 números distintos");
+          {
+            WriteLine("O input deve ser de 3 números distintos");
+            break;
+          }
 
           ints = ints.OrderByDescending(i => i);
 
@@ -121,7 +136,7 @@ namespace Digi.Test
         case 3:
           for (var i = 0; i <= 100; i++)
           {
-            WriteLine($"N = {0} ({1})", i, (i % 2 == 0 ? "par" : "ímpar"));
+            WriteLine("N = {0} ({1})", i, (i % 2 == 0 ? "par" : "ímpar"));
           }
 
           break;
@@ -130,7 +145,10 @@ namespace Digi.Test
           input = ReadLine().Trim();
 
           if (!int.TryParse(input, out n))
-            throw new ArgumentException("Esperado input numérico, porém recebido texto");
+          {
+            WriteLine("Esperado input numérico, porém recebido texto");
+            break;
+          }
 
           WriteLine(n < 1 || n > 9
             ? "O valor informado não está na faixa permitida"
@@ -143,11 +161,12 @@ namespace Digi.Test
 
           if (!float.TryParse(input, out var celsius))
           {
-            throw new ArgumentException("Esperado input numérico, porém recebido texto");
+            WriteLine("Esperado input numérico, porém recebido texto");
+            break;
           }
 
           var fahrenheit = ConvertCelsiusToFahrenheit(celsius);
-          WriteLine($"{celsius}ºC em Fahrenheit é igual a {fahrenheit}ºF");
+          WriteLine($"{celsius}°C em Fahrenheit é igual a {fahrenheit}°F");
 
           break;
       }
