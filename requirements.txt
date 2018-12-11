@@ -1,0 +1,10 @@
+1 - Escreva um algoritmo que receba três números inteiros e imprima o menor deles.
+
+2 - Escreva um algoritmo que receba três números inteiros e diferentes e mostre-os em ordem decrescente.
+
+3 - Escreva um algoritmo que imprime na tela a sequencia de 0 a 100 e apresente para cada número uma mensagem informando se o número é par ou ímpar.
+
+4 - Escreva um algoritmo que receba um valor que esteja entre a faixa de 1 a 9 e exibir a mensagem "O valor informado está na faixa permitida" caso o valor esteja na faixa permitida, ou "O valor informado não está na faixa permitida" caso o usuário forneça um valor menor que 1 ou maior que 9.
+
+5 - Escreva um algoritmo que receba um valor em graus Celsius, calcule e escreva o valor correspondente em Fahrenheit.
+Fórmula: C/5=(F-32)/9.
